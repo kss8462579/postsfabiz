@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>현장 자동화 노트</title><link href="https://postsfabiz.com/ko/"/><link rel="self" href="https://postsfabiz.com/ko/feed.xml"/><id>https://postsfabiz.com/ko/</id><updated>2026-11-21T00:00:00Z</updated><author><name>현장 자동화 노트</name></author>
+<entry><title>PLC 래더 표준화가 유지보수 시간을 줄이는 이유</title><link href="https://postsfabiz.com/ko/why-standardized-plc-ladder-logic-cuts-maintenance-time/"/><id>https://postsfabiz.com/ko/why-standardized-plc-ladder-logic-cuts-maintenance-time/</id><updated>2026-11-21T00:00:00Z</updated><summary>래더 프로그램을 표준화하면 고장 원인을 찾는 시간이 왜 줄어드는지, 무엇부터 표준화해야 하는지 정리했다.</summary></entry>
+</feed>

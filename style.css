@@ -1,22 +1,112 @@
-:root{--fg:#1c2530;--muted:#5f6b7a;--line:#e3e7ec;--accent:#0b5cad;--bg:#fff}
-@media(prefers-color-scheme:dark){:root{--fg:#e6eaef;--muted:#9aa5b1;--line:#2c3540;--accent:#6db3f2;--bg:#12171d}}
+/* 래더 다이어그램을 뼈대로 한 블로그: 좌우 모선(rail) 사이에 글 하나가 렁(rung) 하나. */
+:root{
+  --bg:#F4F6F5; --ink:#18242C; --mu:#5C6B75; --wire:#3B4E5C; --link:#1D5FB4; --live:#1F9D55; --line:#D5DBDD;
+  --lamp-expertise:#1D5FB4; --lamp-data:#D99A00; --lamp-general:#FFFFFF;
+  --gap:72px; --rgap:44px;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#131A1F; --ink:#E3E9EC; --mu:#93A1AA; --wire:#8696A1; --link:#7DB7F5; --live:#3DCB7A; --line:#2A353D;
+  --lamp-expertise:#5AA2F0; --lamp-data:#F0B429; --lamp-general:#F2F5F7;
+}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.75 system-ui,-apple-system,"Malgun Gothic","Noto Sans KR",sans-serif}
-header,main,footer{max-width:760px;margin:0 auto;padding:1rem 1.25rem}
-header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line)}
-.brand{font-weight:700;font-size:1.15rem;color:var(--fg);text-decoration:none}
-nav a{margin-left:1rem;color:var(--muted);text-decoration:none;font-size:.95rem}
-a{color:var(--accent)}
-h1{font-size:1.8rem;line-height:1.3;margin:1.5rem 0 .5rem}
-h2{font-size:1.3rem;margin:2.2rem 0 .6rem}
-.meta,.tagline,.disclosure,footer{color:var(--muted);font-size:.9rem}
-.disclosure{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line)}
-.posts{list-style:none;padding:0}
-.posts li{padding:1rem 0;border-bottom:1px solid var(--line)}
-.posts a{font-weight:600;font-size:1.1rem;text-decoration:none}
-.posts span{float:right;color:var(--muted);font-size:.85rem}
-.posts p{margin:.3rem 0 0;color:var(--muted)}
-table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;font-size:.92rem}
-th,td{border:1px solid var(--line);padding:.45rem .7rem;text-align:right;white-space:nowrap}
-th:first-child,td:first-child{text-align:left}
-pre{overflow-x:auto;padding:1rem;border:1px solid var(--line);border-radius:6px}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 17px/1.8 "IBM Plex Sans KR","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif;
+  word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--link);text-underline-offset:.18em}
+a:focus-visible{outline:2px solid var(--live);outline-offset:3px;border-radius:2px}
+
+/* 모선 */
+.frame{position:relative;max-width:900px;margin:0 auto;padding:0 var(--rgap) 0 var(--gap);min-height:100vh}
+.frame::before,.frame::after{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--wire)}
+.frame::before{left:20px}
+.frame::after{right:20px}
+
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:1.6rem 0 0}
+.brand{font-weight:700;font-size:1.02rem;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.top nav a,footer a{color:var(--mu);text-decoration:none;font-size:.92rem;margin-left:1.3rem}
+.top nav a:hover,footer a:hover{color:var(--ink);text-decoration:underline}
+
+.hero{padding:4.2rem 0 2.6rem}
+.hero h1{margin:0;font-size:clamp(2.1rem,6vw,3.3rem);line-height:1.12;font-weight:700;letter-spacing:-.035em}
+.hero p{margin:.9rem 0 0;color:var(--mu);font-size:1.08rem}
+.list-head{font-size:.95rem;font-weight:500;color:var(--mu);margin:2.4rem 0 .2rem}
+
+/* 렁: 접점 ─ 날짜 ─────── 분류 ─ 코일 */
+.ladder{list-style:none;margin:0;padding:0}
+.rung{padding:1.5rem 0 1.1rem}
+.wire{display:flex;align-items:center;margin:0 calc(20px - var(--rgap)) .55rem calc(20px - var(--gap));
+  color:var(--mu);font-size:.84rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.w{display:block;height:2px;background:var(--wire);flex:none}
+.w-in{width:calc((var(--gap) - 20px - 12px) / 2)}
+.w-s{width:12px}
+.w-fill{flex:1 1 auto;min-width:16px}
+.w-out{width:calc(var(--rgap) - 20px)}
+.contact{flex:none;width:12px;height:20px;border:solid var(--wire);border-width:0 2px}
+.wire time{padding:0 .6rem}
+.wire .cat{padding:0 .6rem}
+.coil{flex:none;width:22px;height:22px;border:2px solid var(--wire);border-radius:50%;position:relative}
+.coil::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--lamp-general);box-shadow:inset 0 0 0 1px rgba(60,78,92,.35)}
+.lamp-expertise::after{background:var(--lamp-expertise);box-shadow:none}
+.lamp-data::after{background:var(--lamp-data);box-shadow:none}
+.rung-title{display:block;font-size:1.32rem;line-height:1.38;font-weight:700;letter-spacing:-.02em;color:var(--ink);text-decoration:none}
+.rung-desc{margin:.35rem 0 0;color:var(--mu);font-size:.98rem;line-height:1.65;max-width:38em}
+/* 모니터 모드처럼, 가리킨 렁에 '통전' 표시 */
+.rung:hover .w,.rung:focus-within .w{background:var(--live)}
+.rung:hover .contact,.rung:focus-within .contact,.rung:hover .coil,.rung:focus-within .coil{border-color:var(--live)}
+.rung:hover .rung-title,.rung-title:focus-visible{text-decoration:underline;text-decoration-thickness:2px;text-decoration-color:var(--live)}
+.w,.contact,.coil{transition:background-color .12s,border-color .12s}
+@media (prefers-reduced-motion:reduce){.w,.contact,.coil{transition:none}}
+
+/* 글 */
+.post-head{padding:3rem 0 .4rem}
+.post-head h1{margin:.5rem 0 0;font-size:clamp(1.75rem,4.6vw,2.5rem);line-height:1.24;font-weight:700;letter-spacing:-.03em}
+.lede{margin:1rem 0 0;color:var(--mu);font-size:1.1rem;line-height:1.7;max-width:36em}
+.draft-flag{color:#B3372E;font-weight:700;margin:.6rem 0 0}
+.prose{max-width:40em;padding-top:1rem}
+.prose>*:first-child{margin-top:1rem}
+.prose p{margin:1.15em 0}
+.prose h2{position:relative;font-size:1.42rem;line-height:1.35;font-weight:700;letter-spacing:-.02em;margin:2.9em 0 .7em}
+.prose h2::before{content:"";position:absolute;left:calc(20px - var(--gap));top:.68em;width:calc(var(--gap) - 20px - 16px);height:2px;background:var(--wire)}
+.prose h3{font-size:1.12rem;margin:2em 0 .5em}
+.prose ul,.prose ol{padding-left:1.3em;margin:1.1em 0}
+.prose li{margin:.45em 0}
+.prose li::marker{color:var(--mu)}
+.prose strong{font-weight:700}
+.prose blockquote{margin:1.5em 0;padding:.1em 0 .1em 1.1em;border-left:2px solid var(--wire);color:var(--mu)}
+.prose code{font-family:Consolas,"D2Coding",monospace;font-size:.9em;background:rgba(120,140,155,.16);padding:.1em .35em;border-radius:3px}
+.prose pre{overflow-x:auto;padding:1rem 1.1rem;border:1px solid var(--line);border-radius:4px;line-height:1.55}
+.prose pre code{background:none;padding:0}
+.prose table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%;font-size:.92rem;font-variant-numeric:tabular-nums;margin:1.6em 0}
+.prose th,.prose td{border-bottom:1px solid var(--line);padding:.5rem .9rem;text-align:right;white-space:nowrap}
+.prose th{border-bottom:2px solid var(--wire);font-weight:500;color:var(--mu)}
+.prose th:first-child,.prose td:first-child{text-align:left;padding-left:0;font-weight:500}
+.prose img{max-width:100%;height:auto}
+.tags{margin:2.6rem 0 0;display:flex;flex-wrap:wrap;gap:.4rem .5rem}
+.tags span{font-size:.86rem;color:var(--mu);border:1px solid var(--line);border-radius:3px;padding:.05rem .55rem}
+.disclosure{margin:1.2rem 0 0;color:var(--mu);font-size:.86rem}
+
+/* END 명령으로 끝나는 프로그램 */
+footer{padding:3.5rem 0 2.2rem;color:var(--mu);font-size:.9rem}
+footer p{margin:.3rem 0}
+footer a:first-child{margin-left:0}
+.end{display:flex;align-items:center;margin:0 0 1.4rem calc(20px - var(--gap))}
+.end .w-in{width:calc(var(--gap) - 20px)}
+.end-box{flex:none;border:2px solid var(--wire);padding:0 .7rem;font-size:.8rem;font-weight:700;line-height:1.7;letter-spacing:.06em;color:var(--wire)}
+.end .w-fill{display:none}
+
+@media (max-width:640px){
+  :root{--gap:44px;--rgap:22px}
+  body{font-size:16.5px}
+  .frame::before{left:14px}
+  .frame::after{display:none}
+  .wire{margin-left:calc(14px - var(--gap));margin-right:0}
+  .w-in{width:calc((var(--gap) - 14px - 12px) / 2)}
+  .w-out{display:none}
+  .prose h2::before{left:calc(14px - var(--gap));width:calc(var(--gap) - 14px - 12px)}
+  .end{margin-left:calc(14px - var(--gap))}
+  .end .w-in{width:calc(var(--gap) - 14px)}
+  .hero{padding:2.8rem 0 1.6rem}
+  .rung-title{font-size:1.18rem}
+  .top nav a{margin-left:.9rem}
+}

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>USB RS-485 컨버터 고르는 법: Modbus RTU 현장 작업 기준 | 현장 자동화 노트</title>
+<meta name="description" content="절연, 송수신 방향 제어, 종단·바이어스 저항, 드라이버 특성까지 USB RS-485 컨버터 선택 기준을 정리한다.">
+<link rel="canonical" href="https://postsfabiz.com/ko/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
+<link rel="alternate" hreflang="en" href="https://postsfabiz.com/en/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
+<link rel="alternate" hreflang="ko" href="https://postsfabiz.com/ko/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
+<meta property="og:title" content="USB RS-485 컨버터 고르는 법: Modbus RTU 현장 작업 기준">
+<meta property="og:description" content="절연, 송수신 방향 제어, 종단·바이어스 저항, 드라이버 특성까지 USB RS-485 컨버터 선택 기준을 정리한다.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://postsfabiz.com/ko/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
+<meta property="og:site_name" content="현장 자동화 노트">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" href="/ko/feed.xml" title="현장 자동화 노트">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/style.css?v=efde9d9d">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "USB RS-485 컨버터 고르는 법: Modbus RTU 현장 작업 기준", "description": "절연, 송수신 방향 제어, 종단·바이어스 저항, 드라이버 특성까지 USB RS-485 컨버터 선택 기준을 정리한다.", "datePublished": "2026-11-25", "inLanguage": "ko", "author": {"@type": "Person", "name": "현장 자동화 노트"}}</script>
+</head>
+<body>
+<div class="frame">
+<header class="top"><a class="brand" href="/ko/">현장 자동화 노트</a>
+<nav><a href="/ko/about/">소개</a><a href="/en/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/" hreflang="en">English</a></nav></header>
+<main>
+<article class="post">
+<header class="post-head"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-25">2026-11-25</time><i class="w w-fill"></i><span class="cat">장비 선택</span><i class="w w-s"></i><span class="coil lamp-gear"></span><i class="w w-out"></i></div>
+<h1>USB RS-485 컨버터 고르는 법: Modbus RTU 현장 작업 기준</h1>
+<p class="lede">절연, 송수신 방향 제어, 종단·바이어스 저항, 드라이버 특성까지 USB RS-485 컨버터 선택 기준을 정리한다.</p>
+</header>
+<p class="aff-note">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
+<div class="prose"><p>USB RS-485 컨버터는 시운전 가방에서 가장 싼 물건이지만, 조용히 틀린 답을 줄 수 있는 몇 안 되는 도구다. 인버터나 전력량계, 온도 조절기가 응답하지 않으면 배선, 국번, 통신 속도부터 의심한다. 그런데 컨버터 자체가 불안정하면 그 점검 결과를 전부 믿을 수 없게 된다. 아래는 진단에 쓸 수 있는 컨버터와 그 자체가 진단 대상이 되는 컨버터를 가르는 사양이다.</p>
+<h2>제품이 아니라 작업에서 출발한다</h2>
+<p>같은 도구라도 작업에 따라 요구가 다르다.</p>
+<table>
+<thead>
+<tr>
+<th>작업</th>
+<th>연결 대상</th>
+<th>중요한 사양</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>책상 위 단품 설정</td>
+<td>기기 1대, 짧은 케이블, 같은 전원</td>
+<td>안정적인 드라이버, 명확한 단자 표기, TX/RX 표시등</td>
+</tr>
+<tr>
+<td>제어반·라인 통신 불량 점검</td>
+<td>설치된 버스, 긴 케이블, 주변의 인버터와 접촉기, 알 수 없는 접지 상태</td>
+<td>절연, 서지 보호, 종단·바이어스 저항 전환</td>
+</tr>
+<tr>
+<td>상시 설치</td>
+<td>몇 달씩 켜 두는 PC나 게이트웨이</td>
+<td>절연, 고정 방식, 사용 온도 범위, 포트 번호가 유지되는 고유 일련번호</td>
+</tr>
+</tbody>
+</table>
+<p>첫째 줄 기준으로 고른 컨버터도 둘째 줄 작업에서 한동안은 동작한다. 하나로 현장 작업을 다 해야 한다면 둘째 줄을 기준으로 고르는 편이 맞다.</p>
+<h2>절연과 보호</h2>
+<p>실제 설비에서 가장 중요한 사양은 <strong>갈바닉 절연</strong>이다. 비절연 컨버터는 버스의 신호 접지를 USB 실드를 통해 노트북 접지에 묶고, 충전기를 꽂은 상태라면 보호 접지까지 이어지는 경우가 많다. RS-485 수신기가 견디는 공통 모드 전압은 규격상 대략 -7 V에서 +12 V까지다. 노트북이 물린 접지와 수십 미터 떨어진 인버터 반의 접지 사이에는 스위칭 순간 그보다 큰 전위차가 생길 수 있다. 결과는 간헐적인 프레임 오류에서 USB 포트 손상까지 다양하다.</p>
+<p>절연형 제품을 비교할 때는 세 가지를 본다.</p>
+<ul>
+<li>신호와 전원이 모두 절연되는가. 데이터선만 절연한 제품도 있다.</li>
+<li>절연 전압이 명시되어 있는가. 시험 전압인지 연속 정격인지도 구분한다.</li>
+<li>버스 쪽에 신호 공통(SG) 단자가 있는가. 절연하면 우연히 생기던 접지 경로가 없어지므로 공통선을 의도적으로 연결해야 한다. A, B 두 단자만 있는 절연 컨버터는 버스 쪽 기준 전위가 떠 있게 된다.</li>
+</ul>
+<p>통신 컨버터의 절연은 장비와 신호 품질을 보호하는 것이다. 위험 전압 주변에서 지켜야 할 작업 안전 수칙을 대신하지 않는다.</p>
+<p><strong>과도 전압 보호</strong>는 별도 항목이다. 버스 단자의 ESD·서지 억제 성능으로, 보통 IEC 61000-4 계열 시험을 기준으로 표기한다. 제어반 안에서 수없이 꽂고 뽑는 도구이므로 "보호 회로 내장"이라는 문구보다 수치가 적힌 제품을 고른다.</p>
+<h2>방향 제어: 잘 적혀 있지 않은 핵심 사양</h2>
+<p>2선식 RS-485는 반이중이다. 컨버터는 송신하는 동안만 드라이버를 켜고, 끝나면 곧바로 선로를 놓아야 슬레이브가 응답할 수 있다. 이 전환 방식이 응답 누락 여부를 좌우한다.</p>
+<ul>
+<li><strong>자동(하드웨어) 방향 제어.</strong> USB 브리지 칩의 송신 허가 신호나 데이터에 반응하는 타이밍 회로로 컨버터가 스스로 전환한다. 소프트웨어 설정이 필요 없다. 기기 제조사의 설정 프로그램 중에는 RTS를 제어하는 옵션이 없는 것이 많으므로 현장용은 이 방식이어야 한다.</li>
+<li><strong>RTS 제어.</strong> 프로그램이나 드라이버가 프레임 앞뒤로 RTS를 바꿔 줘야 한다. 일반 PC 운영체제에서는 타이밍이 일정하지 않아서, 해제가 늦으면 응답의 첫 바이트와 충돌한다.</li>
+<li><strong>아주 단순한 회로의 데이터 구동 방식.</strong> 일부 저가 회로는 한쪽 논리 상태에서만 선로를 구동하고 반대 상태는 바이어스 저항에 맡긴다. 짧은 케이블에서는 되지만 길거나 노드가 많은 버스에서는 여유가 줄어든다.</li>
+</ul>
+<p>제품 설명에 방식이 적혀 있지 않은 경우가 많다. "자동 방향 제어" 표기, 동작이 보장되는 통신 속도 범위, 매뉴얼의 블록도가 단서가 된다. 응답이 빠른 슬레이브에서 응답 첫 바이트가 반복해서 빠진다면 컨버터의 전환 시간을 먼저 의심한다.</p>
+<h2>종단, 바이어스, 배선 방식</h2>
+<p><strong>종단 저항.</strong> 버스는 물리적 양 끝 두 곳에만 종단한다. 저항값은 케이블 특성 임피던스에 맞추며 보통 120 Ω이다. 진단용 컨버터는 이미 종단된 버스나 버스 중간에 물리는 경우가 대부분이다. 종단 저항이 항상 켜져 있는 컨버터는 세 번째 종단이 되어 모든 노드의 신호 진폭을 낮춘다. 스위치로 끌 수 있고 기본 상태가 문서에 적힌 제품을 고른다.</p>
+<p><strong>바이어스(페일세이프) 저항.</strong> 아무도 송신하지 않을 때 선로가 정해진 유휴 상태에 있어야 수신기가 노이즈를 시작 비트로 읽지 않는다. Modbus 시리얼 규격은 바이어스 회로를 버스의 한 곳, 보통 마스터 쪽에 두도록 한다. 책상에서 컨버터가 마스터가 될 때는 내장 바이어스가 도움이 되고, 이미 마스터가 있는 버스에 물릴 때는 부하만 더한다. 따라서 이것도 전환식이 좋다.</p>
+<p><strong>2선식과 4선식.</strong> Modbus RTU 기기는 대부분 2선식이지만 4선식 RS-485나 RS-422를 쓰는 장비도 있다. 둘 다 지원하면 도구를 두 개 들고 다닐 필요가 없다.</p>
+<p><strong>단자와 표기.</strong> RS-485에는 통일된 D-sub 9핀 배열이 없으므로 나사식이나 스프링 단자가 편하다. A/B 표기는 제조사마다 반대로 쓰는 경우가 있다. D+, D-처럼 극성이 함께 적힌 제품이 혼동이 적다. 다른 항목을 다 확인했는데도 응답이 없으면 두 데이터선을 바꿔 보는 것은 정당한 시험이며, 규격을 따르는 트랜시버는 이로 인해 손상되지 않는다.</p>
+<p><strong>표시등.</strong> TX와 RX가 따로 있으면 요청이 나가는지, 무언가 돌아오는지를 바로 알 수 있다.</p>
+<h2>USB 쪽: 드라이버, 지연, 포트 번호</h2>
+<ul>
+<li><strong>드라이버.</strong> 제조사가 브리지 칩을 밝히고 있는지, 사용하는 운영체제용 서명 드라이버가 있는지 확인한다. 유명 칩의 무단 복제품을 쓴 어댑터는 드라이버 업데이트 뒤에 동작하지 않게 된 사례가 있다.</li>
+<li><strong>지연.</strong> USB 시리얼 어댑터는 수신 바이트를 묶어서 PC에 넘기며, 이 간격은 드라이버의 지연 타이머가 정한다. 그래서 Modbus 한 번의 요청·응답이 통신 속도로 계산한 것보다 오래 걸리고, 여러 슬레이브를 빠르게 폴링하면 내장 시리얼 포트보다 느리다. 드라이버에 따라 포트 설정에서 줄일 수 있지만 구체적인 값과 한계는 칩마다 다르므로 칩 제조사 문서를 따른다.</li>
+<li><strong>포트 번호 고정.</strong> 칩에 고유 일련번호가 들어 있으면 어느 USB 포트에 꽂아도 같은 포트 번호가 유지된다. 없으면 꽂는 자리마다 번호가 바뀐다. 상시 설치 PC에서는 실제 장애 원인이 된다.</li>
+<li><strong>통신 속도 범위.</strong> 9600~115200 bps는 대부분 지원한다. 더 높거나 비표준 속도를 쓰는 장비가 있으면 칩과 방향 제어 회로가 모두 지원하는지 확인한다.</li>
+</ul>
+<h2>버스에 물릴 때의 함정</h2>
+<p><strong>두 번째 마스터가 되는 경우.</strong> Modbus RTU의 마스터는 하나다. PLC가 폴링 중인 버스에 노트북을 물리고 요청을 보내면 운전 중인 시스템에 충돌과 타임아웃이 생긴다. 기존 버스를 관찰할 때는 종단과 바이어스를 끄고 모니터링 프로그램으로 수신만 한다.</p>
+<p><strong>운전 중인 설비에 쓰기.</strong> 레지스터 읽기는 영향이 없다. 그러나 가동 중인 라인의 인버터에 설정값이나 지령 워드를 쓰면 기계가 움직이거나 동작이 바뀔 수 있다. 통전 중인 제어반 내부 작업은 자격을 갖춘 사람이 사업장의 전원 차단·잠금 절차에 따라 하고, 해당 레지스터의 의미를 알고 승인받은 경우가 아니면 생산 중인 설비에 쓰지 않는다.</p>
+<p><strong>짧은 케이블 시험만 믿는 경우.</strong> 책상에서 50 cm 선으로 동작했다는 것은 드라이버가 설치됐다는 것 이상을 증명하지 못한다. 사용하는 최저·최고 속도, 긴 케이블, 응답이 빠른 슬레이브로 미리 확인한다.</p>
+<p><strong>USB 케이블.</strong> 인버터 동력선 옆에 늘어진 길고 가는 비차폐 USB 케이블은 노이즈를 그대로 받는다. 짧은 차폐 케이블을 쓰고, 케이블이 당겨져도 단자에 힘이 걸리지 않는 구조인지 본다.</p>
+<h2>구매 전 확인 목록</h2>
+<ol>
+<li>신호와 전원 모두 절연, 절연 정격 명시, 버스 쪽 신호 공통 단자</li>
+<li>버스 단자의 ESD·서지 보호 수치</li>
+<li>자동 방향 제어와 지원 통신 속도 범위</li>
+<li>종단 저항과 바이어스 저항의 개별 전환</li>
+<li>보유 설비에 필요하다면 2선식·4선식 겸용</li>
+<li>브리지 칩 명시, 서명 드라이버, 고유 일련번호</li>
+<li>TX/RX 표시등, 극성이 분명한 단자 표기</li>
+</ol>
+<p>앞의 네 항목을 만족하는 컨버터는 통신 불량의 용의자 목록에서 스스로 빠진다. 진단 도구에 필요한 것은 결국 그것이다.</p></div>
+<aside class="aff"><script src="https://ads-partners.coupang.com/g.js"></script> <script> new PartnersCoupang.G({"id":1059152,"template":"carousel","trackingCode":"AF1367821","width":"680","height":"140","tsource":""}); </script></aside>
+<p class="tags"><span>RS-485</span><span>Modbus RTU</span><span>USB 컨버터</span><span>시리얼 통신</span><span>현장 공구</span></p>
+<p class="disclosure">초안 작성에 AI 도구를 사용했으며 운영자가 검토했습니다.</p>
+</article>
+<h2 class="list-head">다른 글</h2>
+<ul class="ladder">
+<li class="rung"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-25">2026-11-25</time><i class="w w-fill"></i><span class="cat">현장 실무</span><i class="w w-s"></i><span class="coil lamp-expertise"></span><i class="w w-out"></i></div>
+<a class="rung-title" href="/ko/opc-ua-vs-mqtt-for-shop-floor-data-collection/">설비 데이터 수집: OPC UA와 MQTT 중 무엇을 쓸까</a>
+<p class="rung-desc">OPC UA와 MQTT는 역할이 다르다. 구간별 선택 기준과 각각에서 자주 만나는 장애, 점검 순서를 정리한다.</p></li>
+<li class="rung"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-21">2026-11-21</time><i class="w w-fill"></i><span class="cat">현장 실무</span><i class="w w-s"></i><span class="coil lamp-expertise"></span><i class="w w-out"></i></div>
+<a class="rung-title" href="/ko/why-standardized-plc-ladder-logic-cuts-maintenance-time/">PLC 래더 표준화가 유지보수 시간을 줄이는 이유</a>
+<p class="rung-desc">래더 프로그램을 표준화하면 고장 원인을 찾는 시간이 왜 줄어드는지, 무엇부터 표준화해야 하는지 정리했다.</p></li>
+</ul>
+</main>
+<footer><div class="end"><i class="w w-in"></i><span class="end-box">END</span><i class="w w-fill"></i></div>
+<p>© 2026 현장 자동화 노트</p>
+<p><a href="/ko/about/">소개</a><a href="/ko/privacy/">개인정보처리방침</a><a href="/ko/feed.xml">RSS</a></p></footer>
+</div>
+</body>
+</html>

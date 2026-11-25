@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPC UA vs MQTT for shop-floor data collection: which to use where | Shopfloor Automation Notes</title>
+<meta name="description" content="OPC UA and MQTT solve different halves of the data collection problem. How to choose per layer, and the faults each one produces.">
+<link rel="canonical" href="https://postsfabiz.com/en/opc-ua-vs-mqtt-for-shop-floor-data-collection/">
+<link rel="alternate" hreflang="en" href="https://postsfabiz.com/en/opc-ua-vs-mqtt-for-shop-floor-data-collection/">
+<link rel="alternate" hreflang="ko" href="https://postsfabiz.com/ko/opc-ua-vs-mqtt-for-shop-floor-data-collection/">
+<meta property="og:title" content="OPC UA vs MQTT for shop-floor data collection: which to use where">
+<meta property="og:description" content="OPC UA and MQTT solve different halves of the data collection problem. How to choose per layer, and the faults each one produces.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://postsfabiz.com/en/opc-ua-vs-mqtt-for-shop-floor-data-collection/">
+<meta property="og:site_name" content="Shopfloor Automation Notes">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" href="/en/feed.xml" title="Shopfloor Automation Notes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/style.css?v=efde9d9d">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "OPC UA vs MQTT for shop-floor data collection: which to use where", "description": "OPC UA and MQTT solve different halves of the data collection problem. How to choose per layer, and the faults each one produces.", "datePublished": "2026-11-25", "inLanguage": "en", "author": {"@type": "Person", "name": "Shopfloor Automation Notes"}}</script>
+</head>
+<body>
+<div class="frame">
+<header class="top"><a class="brand" href="/en/">Shopfloor Automation Notes</a>
+<nav><a href="/en/about/">About</a><a href="/ko/opc-ua-vs-mqtt-for-shop-floor-data-collection/" hreflang="ko">한국어</a></nav></header>
+<main>
+<article class="post">
+<header class="post-head"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-25">2026-11-25</time><i class="w w-fill"></i><span class="cat">Field practice</span><i class="w w-s"></i><span class="coil lamp-expertise"></span><i class="w w-out"></i></div>
+<h1>OPC UA vs MQTT for shop-floor data collection: which to use where</h1>
+<p class="lede">OPC UA and MQTT solve different halves of the data collection problem. How to choose per layer, and the faults each one produces.</p>
+</header>
+
+<div class="prose"><p>The question usually arrives as "should we use OPC UA or MQTT?", but the two were built to answer different questions. OPC UA answers "what is this data and how do I read it from a controller?". MQTT answers "how do I move messages from many senders to many receivers over a network I do not fully control?". Most collection projects that run into trouble picked one of them to do the other's job.</p>
+<h2>What each protocol actually gives you</h2>
+<p><strong>OPC UA</strong> (standardised as IEC 62541) is, in its classic form, a client/server protocol. The server, often built into the PLC or running on a gateway next to it, exposes an address space: a browsable tree of nodes with data types, engineering units and structure. A client opens a session, browses or addresses nodes, and either reads them or creates a subscription. In a subscription the server samples each monitored item at a requested sampling interval and sends changes at a publishing interval. Security is part of the specification: applications identify themselves with certificates, and messages can be signed or signed and encrypted.</p>
+<p><strong>MQTT</strong> (an OASIS standard) is a publish/subscribe transport built around a broker. A client publishes a payload to a topic such as <code>plant/line3/press2/temperature</code>; the broker forwards it to every client subscribed to a matching topic. Publishers and subscribers never connect to each other. MQTT defines three quality-of-service levels, retained messages (the broker keeps the last value of a topic for new subscribers) and a last-will message (published by the broker when a client drops off unexpectedly). It does not define what is inside the payload. That is left entirely to you.</p>
+<table>
+<thead>
+<tr>
+<th>Point</th>
+<th>OPC UA (client/server)</th>
+<th>MQTT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern</td>
+<td>Client connects to each server</td>
+<td>Everyone connects out to a broker</td>
+</tr>
+<tr>
+<td>Data meaning</td>
+<td>Typed, browsable, self-describing</td>
+<td>Undefined; needs your own convention</td>
+</tr>
+<tr>
+<td>Connection direction</td>
+<td>Inbound to the device</td>
+<td>Outbound from the device</td>
+</tr>
+<tr>
+<td>Adding a consumer</td>
+<td>New session on each server</td>
+<td>One more subscription on the broker</td>
+</tr>
+<tr>
+<td>Writing back to the machine</td>
+<td>Built in (write, method call)</td>
+<td>Possible, but you design it yourself</td>
+</tr>
+<tr>
+<td>Typical home</td>
+<td>Controller to gateway/SCADA</td>
+<td>Gateway to MES, historian, cloud</td>
+</tr>
+</tbody>
+</table>
+<h2>Choosing by layer rather than by project</h2>
+<p>A choice that holds up in practice is to decide separately for each hop.</p>
+<p><strong>Controller to edge.</strong> If the PLC has an OPC UA server, use it. You get data types and names from the controller project instead of maintaining a hand-typed register map, and access can be restricted per node. For older controllers without one, the realistic options are the vendor's native driver or a fieldbus gateway, and the gateway then presents the data as OPC UA or publishes it to MQTT.</p>
+<p><strong>Edge to plant systems or cloud.</strong> MQTT fits when there are several consumers, when links are unreliable, or when the receiving side sits in another network zone. The device only needs an outbound connection to the broker, which is much easier to get through a firewall review than an inbound port on every machine.</p>
+<p><strong>A small, flat installation.</strong> With a handful of machines and a single SCADA or MES collector on the same network, adding a broker only adds a component to maintain. Direct OPC UA client/server is enough.</p>
+<p>The two also overlap by design: the OPC UA specification includes a PubSub model that can use an MQTT broker as its transport, and the Sparkplug specification adds a fixed topic structure, payload format and device state handling on top of MQTT. Both exist because plain MQTT says nothing about meaning. Support for either varies by product, so check what your controllers and software actually implement before designing around them.</p>
+<h2>Faults you will meet on the OPC UA side</h2>
+<p><strong>The client cannot connect although the network is fine.</strong> The most common cause is certificate trust. Each side must trust the other's application certificate, and on many servers a new client's certificate lands in a rejected list until someone moves it to the trusted list. Check this before chasing firewalls. Next most likely are a mismatch between the security policy the client requests and the ones the server allows, a host name in the endpoint URL that the client cannot resolve, and clock differences large enough to make a certificate look not yet valid or expired.</p>
+<p><strong>Short events are missing from the data.</strong> A subscription reports what the server saw at its sampling interval. A bit that goes on and off between two samples never appears. Requesting a faster interval helps only down to what the server supports; embedded servers often revise the request to a slower value, and the client is told the revised value. For pulses and counts, latch or count in the PLC and collect the latched value or the counter.</p>
+<p><strong>The server becomes slow or refuses new sessions.</strong> Embedded servers have limits on sessions, subscriptions and monitored items, and they share the CPU with the control program. Limits depend on the model and firmware, so read them from the manual. Several clients each subscribing to the same thousand tags is the usual way to hit them; one collector that redistributes the data is the fix.</p>
+<p><strong>Values look frozen.</strong> A deadband that is too wide, or a subscription that silently died after a network break and was not re-created by the client, both produce a flat line. Compare with a direct read of the node to tell them apart.</p>
+<h2>Faults you will meet on the MQTT side</h2>
+<p><strong>Every consumer parses the data differently.</strong> Without an agreed topic hierarchy and payload schema, each publisher invents its own. Decide before the first device goes live: topic levels (site/area/line/machine/signal), payload format, units, and that the timestamp is taken at the source, not at the receiver.</p>
+<p><strong>Duplicate or missing records.</strong> QoS 0 can lose messages. QoS 1 guarantees delivery at least once, so duplicates are possible after a reconnect; make the consumer tolerant of them, for example by keying records on source timestamp and tag. QoS applies per hop, between a client and the broker, and delivery to a subscriber uses the lower of the published and subscribed levels. It also does not cover the time a publisher is offline unless the publishing device buffers locally.</p>
+<p><strong>A stopped machine still shows a good value.</strong> A retained message stays on the broker indefinitely. If a device dies, new subscribers still receive its last value as if it were current. Use the last-will message to publish an explicit offline state, and always carry a timestamp so stale data is recognisable.</p>
+<p><strong>Everything stops at once.</strong> The broker is a single point of failure by construction. Plan for it: local buffering at the edge, monitoring of the broker itself, and a redundancy option if the data matters.</p>
+<h2>Security and write access</h2>
+<p>Both protocols can be deployed safely and both are frequently deployed open. For OPC UA, do not leave the "None" security policy and anonymous access enabled in production. For MQTT, use TLS, per-client credentials and topic access rules on the broker; an unauthenticated broker lets any device on the network publish to any topic.</p>
+<p>Treat write paths separately from read paths. Data collection needs read access only. If a higher-level system must send recipes or setpoints, restrict it to specific nodes or topics, and have the PLC validate ranges and machine state before accepting a value. Starting motion or changing safety-related parameters must remain under the machine's own control and safety functions, never under a remote data path.</p>
+<h2>A check order before you commit</h2>
+<ol>
+<li>List consumers of the data. One collector points to OPC UA alone; several, or any in another zone, points to a broker upstream.</li>
+<li>Check what each controller offers natively and its documented session and item limits.</li>
+<li>Fix the naming: node structure in the PLC and topic hierarchy on the broker should map one to one.</li>
+<li>Decide where timestamps and buffering live. Both belong as close to the machine as possible.</li>
+<li>Test the failure cases on a bench: pull the network cable, restart the broker, restart the PLC, and confirm what the consumers see and how recovery happens without manual steps.</li>
+</ol>
+<p>Step five is the one most often skipped, and it is where the difference between the two protocols shows up most clearly.</p></div>
+
+<p class="tags"><span>OPC UA</span><span>MQTT</span><span>data collection</span><span>IIoT</span><span>PLC</span></p>
+<p class="disclosure">Drafted with AI assistance and reviewed by the site operator.</p>
+</article>
+<h2 class="list-head">More posts</h2>
+<ul class="ladder">
+<li class="rung"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-25">2026-11-25</time><i class="w w-fill"></i><span class="cat">Equipment</span><i class="w w-s"></i><span class="coil lamp-gear"></span><i class="w w-out"></i></div>
+<a class="rung-title" href="/en/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">How to choose a USB to RS-485 converter for Modbus RTU field work</a>
+<p class="rung-desc">Isolation, direction control, termination, bias and drivers: the specifications that make a USB to RS-485 converter trustworthy.</p></li>
+<li class="rung"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-21">2026-11-21</time><i class="w w-fill"></i><span class="cat">Field practice</span><i class="w w-s"></i><span class="coil lamp-expertise"></span><i class="w w-out"></i></div>
+<a class="rung-title" href="/en/why-standardized-plc-ladder-logic-cuts-maintenance-time/">Why standardized PLC ladder logic cuts maintenance time</a>
+<p class="rung-desc">Most downtime is spent finding the fault, not fixing it. Here is how ladder standards shorten that search and where to start.</p></li>
+</ul>
+</main>
+<footer><div class="end"><i class="w w-in"></i><span class="end-box">END</span><i class="w w-fill"></i></div>
+<p>© 2026 Shopfloor Automation Notes</p>
+<p><a href="/en/about/">About</a><a href="/en/privacy/">Privacy</a><a href="/en/feed.xml">RSS</a></p></footer>
+</div>
+</body>
+</html>

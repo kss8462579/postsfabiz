@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to choose a USB to RS-485 converter for Modbus RTU field work | Shopfloor Automation Notes</title>
+<meta name="description" content="Isolation, direction control, termination, bias and drivers: the specifications that make a USB to RS-485 converter trustworthy.">
+<link rel="canonical" href="https://postsfabiz.com/en/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
+<link rel="alternate" hreflang="en" href="https://postsfabiz.com/en/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
+<link rel="alternate" hreflang="ko" href="https://postsfabiz.com/ko/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
+<meta property="og:title" content="How to choose a USB to RS-485 converter for Modbus RTU field work">
+<meta property="og:description" content="Isolation, direction control, termination, bias and drivers: the specifications that make a USB to RS-485 converter trustworthy.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://postsfabiz.com/en/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
+<meta property="og:site_name" content="Shopfloor Automation Notes">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" href="/en/feed.xml" title="Shopfloor Automation Notes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="/style.css?v=efde9d9d">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to choose a USB to RS-485 converter for Modbus RTU field work", "description": "Isolation, direction control, termination, bias and drivers: the specifications that make a USB to RS-485 converter trustworthy.", "datePublished": "2026-11-25", "inLanguage": "en", "author": {"@type": "Person", "name": "Shopfloor Automation Notes"}}</script>
+</head>
+<body>
+<div class="frame">
+<header class="top"><a class="brand" href="/en/">Shopfloor Automation Notes</a>
+<nav><a href="/en/about/">About</a><a href="/ko/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/" hreflang="ko">한국어</a></nav></header>
+<main>
+<article class="post">
+<header class="post-head"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-25">2026-11-25</time><i class="w w-fill"></i><span class="cat">Equipment</span><i class="w w-s"></i><span class="coil lamp-gear"></span><i class="w w-out"></i></div>
+<h1>How to choose a USB to RS-485 converter for Modbus RTU field work</h1>
+<p class="lede">Isolation, direction control, termination, bias and drivers: the specifications that make a USB to RS-485 converter trustworthy.</p>
+</header>
+
+<div class="prose"><p>A USB to RS-485 converter is the cheapest item in a commissioning bag and one of the few that can quietly give wrong answers. When a drive, a power meter or a temperature controller does not reply, the first suspicion falls on wiring, address and baud rate. If the converter itself is marginal, every one of those checks becomes unreliable. The specifications below are the ones that separate a converter you can diagnose with from one you have to diagnose.</p>
+<h2>Start from the job, not from the product page</h2>
+<p>Three kinds of work put different demands on the same tool.</p>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>What the converter is connected to</th>
+<th>What matters most</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bench setup of a single device</td>
+<td>One device, a metre of cable, same power strip</td>
+<td>Stable driver, clear terminal labels, TX/RX indicators</td>
+</tr>
+<tr>
+<td>Fault-finding in a panel or on a line</td>
+<td>An installed bus, long cable, drives and contactors nearby, unknown grounding</td>
+<td>Galvanic isolation, surge protection, switchable termination and bias</td>
+</tr>
+<tr>
+<td>Left in place as a permanent interface</td>
+<td>A PC or gateway running for months</td>
+<td>Isolation, DIN-rail or fixed mounting, defined operating temperature, a serial number so the port assignment survives a reboot</td>
+</tr>
+</tbody>
+</table>
+<p>A converter chosen for the first row will often work in the second, until the day it does not. If one tool has to cover all of the field work, choose for the second row.</p>
+<h2>Isolation and protection</h2>
+<p><strong>Galvanic isolation</strong> is the specification that matters most on a real machine. A non-isolated converter ties the signal ground of the bus to the ground of the laptop through the USB shield and, when the charger is plugged in, often onward to protective earth. An RS-485 receiver only tolerates a limited common-mode voltage, defined in the standard as roughly -7 V to +12 V. Between a laptop on one earth point and a drive cabinet thirty metres away, the ground difference during switching can exceed that. The result ranges from intermittent framing errors to a damaged USB port.</p>
+<p>An isolated converter separates the USB side from the bus side for both data and power. When comparing products, check three things:</p>
+<ul>
+<li>Whether both signal and power are isolated. Some products isolate only the data lines.</li>
+<li>The stated isolation voltage and whether it is a test voltage or a continuous rating.</li>
+<li>Whether the isolated side has its own signal common terminal. Isolation removes the accidental ground path, so the bus common now has to be connected deliberately. A converter with only two terminals, A and B, leaves the isolated side floating and relies on luck.</li>
+</ul>
+<p>Isolation in a communication converter protects equipment and signal integrity. It is not a substitute for safe working practice around hazardous voltage.</p>
+<p><strong>Transient protection</strong> is a separate line on the datasheet: ESD and surge suppression on the bus terminals, usually referenced to the IEC 61000-4 test series. For a tool that will be connected and disconnected inside cabinets many times, look for stated figures rather than the word "protected".</p>
+<h2>Direction control: the specification that is rarely printed clearly</h2>
+<p>Two-wire RS-485 is half duplex. The converter must enable its driver only while it transmits and release the line immediately afterwards so the slave can answer. How it does that decides whether replies get cut off.</p>
+<ul>
+<li><strong>Automatic, hardware-timed control.</strong> The converter switches direction by itself, either from a dedicated transmit-enable signal of the USB bridge chip or from a timing circuit triggered by the data. No software setting is needed. This is what field work calls for, because many configuration tools from device vendors offer no option to control RTS.</li>
+<li><strong>RTS-controlled.</strong> The application or driver must toggle RTS around each frame. From a desktop operating system the timing is not deterministic, and a late release collides with the first byte of the reply.</li>
+<li><strong>Data-driven enable in very simple designs.</strong> Some low-cost circuits drive the line only for one logic state and let the bias resistors produce the other. This works on a short bench cable and degrades on a long or heavily loaded bus.</li>
+</ul>
+<p>Product pages rarely say which method is used. Useful hints are a statement such as "automatic data direction control", a stated baud rate range over which it works, and a schematic or block diagram in the manual. If a slave is known to reply within a few milliseconds and the first byte of its answer is regularly missing, the turnaround of the converter is the first suspect.</p>
+<h2>Termination, bias and wiring options</h2>
+<p><strong>Termination.</strong> A bus should be terminated at its two physical ends and nowhere else, typically with a resistor matched to the cable, commonly 120 ohms. A diagnostic converter is usually clipped onto a bus that is already terminated, or onto the middle of it. A converter with a fixed, always-on terminator adds a third one and lowers the signal amplitude for every node. Choose a converter where termination is switchable and the default state is documented.</p>
+<p><strong>Bias (failsafe) resistors.</strong> When no driver is active, the line must sit in a defined idle state, or receivers interpret noise as start bits. The Modbus serial line specification places the bias network at one point on the bus, normally the master. If your converter acts as the master on a bench, bias in the converter is helpful. If you attach it to a bus that already has a master, extra bias adds load. Switchable bias covers both cases.</p>
+<p><strong>Two-wire and four-wire.</strong> Most Modbus RTU devices are two-wire, but some equipment uses four-wire RS-485 or RS-422. A converter that supports both, selected by switch or terminal, avoids carrying two tools.</p>
+<p><strong>Terminals and labelling.</strong> Screw or spring terminals are more useful than a nine-pin D-sub, because there is no universal D-sub pinout for RS-485. Be aware that the A/B naming is not used consistently between manufacturers: one vendor's A is another's B. Labels that also show polarity, such as D+ and D-, remove some of the doubt. If nothing responds and everything else has been checked, swapping the two data wires is a legitimate test and does not damage a compliant transceiver.</p>
+<p><strong>Indicators.</strong> Separate TX and RX LEDs answer the first diagnostic question at a glance: is the request leaving, and is anything coming back?</p>
+<h2>The USB side: drivers, latency and port numbers</h2>
+<p>The bridge chip and its driver matter as much as the RS-485 side.</p>
+<ul>
+<li><strong>Driver support.</strong> Check that the manufacturer names the bridge chip and that a signed driver exists for the operating system versions you use. Adapters built around unlicensed copies of well-known chips have a history of stopping work after a driver update.</li>
+<li><strong>Latency.</strong> USB serial adapters deliver received bytes to the PC in packets, governed by a latency timer in the driver. The effect is that each Modbus transaction takes longer than the baud rate suggests, and fast polling of many slaves is slower than on a native serial port. Some drivers allow the timer to be reduced in the port settings. The exact setting and its limits depend on the chip, so follow the chip manufacturer's documentation.</li>
+<li><strong>Stable port assignment.</strong> A bridge chip programmed with a unique serial number lets the operating system keep the same port number whichever USB socket is used. Without one, the number changes with the socket, which is a nuisance for a bench tool and a real failure cause for a permanently installed PC.</li>
+<li><strong>Baud rate range.</strong> Almost any converter handles 9600 to 115200. If you work with equipment using higher or non-standard rates, check that both the chip and the direction control support them.</li>
+</ul>
+<h2>Pitfalls when matching the tool to the bus</h2>
+<p><strong>Becoming a second master.</strong> Modbus RTU allows one master. Connecting a laptop to a bus where a PLC is already polling and then sending requests produces collisions and timeouts on the running system. To observe an existing bus, use the converter receive-only with a monitoring program, with termination and bias switched off.</p>
+<p><strong>Writing to a running machine.</strong> Reading registers is harmless. Writing a setpoint, a command word or a parameter to a drive on a live line can start or change motion. Connect inside energised cabinets only if you are qualified to work there, follow the site's isolation and lockout rules where they apply, and do not write to equipment in production without authorisation and an understanding of what the register does.</p>
+<p><strong>Trusting a short-cable test.</strong> A converter that works on the desk with half a metre of wire has proved its driver installation and little else. Before relying on it, test at the lowest and highest baud rates you use, with a long cable, and with a slave that answers quickly.</p>
+<p><strong>Forgetting the cable.</strong> A thin, unscreened USB cable several metres long next to a drive's motor cable is a noise antenna. A short, screened USB cable and a converter with strain relief are small details that remove a class of intermittent faults.</p>
+<h2>A short checklist before buying</h2>
+<ol>
+<li>Isolation of both data and power, with a stated rating and a signal common terminal on the bus side.</li>
+<li>Stated ESD and surge protection on the bus terminals.</li>
+<li>Automatic direction control, with the supported baud rate range given.</li>
+<li>Termination and bias individually switchable.</li>
+<li>Two-wire and four-wire support if your installed base needs it.</li>
+<li>Named bridge chip, signed drivers, unique serial number.</li>
+<li>TX and RX indicators, terminals with unambiguous polarity marking.</li>
+</ol>
+<p>A converter that satisfies the first four points removes itself from the list of suspects, which is the only thing a diagnostic tool is really for.</p></div>
+
+<p class="tags"><span>RS-485</span><span>Modbus RTU</span><span>USB converter</span><span>serial communication</span><span>field tools</span></p>
+<p class="disclosure">Drafted with AI assistance and reviewed by the site operator.</p>
+</article>
+<h2 class="list-head">More posts</h2>
+<ul class="ladder">
+<li class="rung"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-25">2026-11-25</time><i class="w w-fill"></i><span class="cat">Field practice</span><i class="w w-s"></i><span class="coil lamp-expertise"></span><i class="w w-out"></i></div>
+<a class="rung-title" href="/en/opc-ua-vs-mqtt-for-shop-floor-data-collection/">OPC UA vs MQTT for shop-floor data collection: which to use where</a>
+<p class="rung-desc">OPC UA and MQTT solve different halves of the data collection problem. How to choose per layer, and the faults each one produces.</p></li>
+<li class="rung"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-21">2026-11-21</time><i class="w w-fill"></i><span class="cat">Field practice</span><i class="w w-s"></i><span class="coil lamp-expertise"></span><i class="w w-out"></i></div>
+<a class="rung-title" href="/en/why-standardized-plc-ladder-logic-cuts-maintenance-time/">Why standardized PLC ladder logic cuts maintenance time</a>
+<p class="rung-desc">Most downtime is spent finding the fault, not fixing it. Here is how ladder standards shorten that search and where to start.</p></li>
+</ul>
+</main>
+<footer><div class="end"><i class="w w-in"></i><span class="end-box">END</span><i class="w w-fill"></i></div>
+<p>© 2026 Shopfloor Automation Notes</p>
+<p><a href="/en/about/">About</a><a href="/en/privacy/">Privacy</a><a href="/en/feed.xml">RSS</a></p></footer>
+</div>
+</body>
+</html>

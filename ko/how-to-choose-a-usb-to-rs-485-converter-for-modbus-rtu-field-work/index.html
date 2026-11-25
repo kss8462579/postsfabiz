@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>USB RS-485 컨버터 고르는 법: Modbus RTU 현장 작업 기준 | 현장 자동화 노트</title>
+<title>USB RS-485 컨버터 고르는 법: Modbus RTU 현장 작업 기준 | 살까 말까</title>
 <meta name="description" content="절연, 송수신 방향 제어, 종단·바이어스 저항, 드라이버 특성까지 USB RS-485 컨버터 선택 기준을 정리한다.">
 <link rel="canonical" href="https://postsfabiz.com/ko/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
 <link rel="alternate" hreflang="en" href="https://postsfabiz.com/en/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
@@ -12,25 +12,30 @@
 <meta property="og:description" content="절연, 송수신 방향 제어, 종단·바이어스 저항, 드라이버 특성까지 USB RS-485 컨버터 선택 기준을 정리한다.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://postsfabiz.com/ko/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/">
-<meta property="og:site_name" content="현장 자동화 노트">
+<meta property="og:site_name" content="살까 말까">
+<meta property="og:image" content="https://postsfabiz.com/img/ko-how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work-thumb-6d20504f57.png">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="alternate" type="application/atom+xml" href="/ko/feed.xml" title="현장 자동화 노트">
+<link rel="alternate" type="application/atom+xml" href="/ko/feed.xml" title="살까 말까">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="/style.css?v=efde9d9d">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "USB RS-485 컨버터 고르는 법: Modbus RTU 현장 작업 기준", "description": "절연, 송수신 방향 제어, 종단·바이어스 저항, 드라이버 특성까지 USB RS-485 컨버터 선택 기준을 정리한다.", "datePublished": "2026-11-25", "inLanguage": "ko", "author": {"@type": "Person", "name": "현장 자동화 노트"}}</script>
+<link rel="stylesheet" href="/style.css?v=7be9b041">
+<script src="https://ads-partners.coupang.com/g.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "USB RS-485 컨버터 고르는 법: Modbus RTU 현장 작업 기준", "description": "절연, 송수신 방향 제어, 종단·바이어스 저항, 드라이버 특성까지 USB RS-485 컨버터 선택 기준을 정리한다.", "datePublished": "2026-11-25", "inLanguage": "ko", "author": {"@type": "Person", "name": "살까 말까"}}</script>
 </head>
 <body>
 <div class="frame">
-<header class="top"><a class="brand" href="/ko/">현장 자동화 노트</a>
-<nav><a href="/ko/about/">소개</a><a href="/en/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/" hreflang="en">English</a></nav></header>
+<header class="top"><a class="brand" href="/ko/">살까 말까</a>
+<nav><a href="/ko/c/expertise/">현장 실무</a><a href="/ko/c/gear/">장비 선택</a><a href="/ko/about/">소개</a><a href="/en/how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work/" hreflang="en">English</a></nav></header>
 <main>
 <article class="post">
 <header class="post-head"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-25">2026-11-25</time><i class="w w-fill"></i><span class="cat">장비 선택</span><i class="w w-s"></i><span class="coil lamp-gear"></span><i class="w w-out"></i></div>
 <h1>USB RS-485 컨버터 고르는 법: Modbus RTU 현장 작업 기준</h1>
 <p class="lede">절연, 송수신 방향 제어, 종단·바이어스 저항, 드라이버 특성까지 USB RS-485 컨버터 선택 기준을 정리한다.</p>
 </header>
+<figure class="hero-img"><img src="/img/ko-how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work-thumb-6d20504f57.png" alt="USB RS-485 컨버터 고르는 법: Modbus RTU 현장 작업 기준" width="1200" height="630"></figure>
 <p class="aff-note">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
 <div class="prose"><p>USB RS-485 컨버터는 시운전 가방에서 가장 싼 물건이지만, 조용히 틀린 답을 줄 수 있는 몇 안 되는 도구다. 인버터나 전력량계, 온도 조절기가 응답하지 않으면 배선, 국번, 통신 속도부터 의심한다. 그런데 컨버터 자체가 불안정하면 그 점검 결과를 전부 믿을 수 없게 된다. 아래는 진단에 쓸 수 있는 컨버터와 그 자체가 진단 대상이 되는 컨버터를 가르는 사양이다.</p>
 <h2>제품이 아니라 작업에서 출발한다</h2>
@@ -72,7 +77,7 @@
 </ul>
 <p>통신 컨버터의 절연은 장비와 신호 품질을 보호하는 것이다. 위험 전압 주변에서 지켜야 할 작업 안전 수칙을 대신하지 않는다.</p>
 <p><strong>과도 전압 보호</strong>는 별도 항목이다. 버스 단자의 ESD·서지 억제 성능으로, 보통 IEC 61000-4 계열 시험을 기준으로 표기한다. 제어반 안에서 수없이 꽂고 뽑는 도구이므로 "보호 회로 내장"이라는 문구보다 수치가 적힌 제품을 고른다.</p>
-<h2>방향 제어: 잘 적혀 있지 않은 핵심 사양</h2>
+<aside class="aff"><p class="aff-cta">이 분야 쿠팡 인기 상품</p><script>new PartnersCoupang.G({"id": 1059152, "template": "carousel", "trackingCode": "AF1367821", "width": "680", "height": "140", "tsource": ""});</script></aside><h2>방향 제어: 잘 적혀 있지 않은 핵심 사양</h2>
 <p>2선식 RS-485는 반이중이다. 컨버터는 송신하는 동안만 드라이버를 켜고, 끝나면 곧바로 선로를 놓아야 슬레이브가 응답할 수 있다. 이 전환 방식이 응답 누락 여부를 좌우한다.</p>
 <ul>
 <li><strong>자동(하드웨어) 방향 제어.</strong> USB 브리지 칩의 송신 허가 신호나 데이터에 반응하는 타이밍 회로로 컨버터가 스스로 전환한다. 소프트웨어 설정이 필요 없다. 기기 제조사의 설정 프로그램 중에는 RTS를 제어하는 옵션이 없는 것이 많으므로 현장용은 이 방식이어야 한다.</li>
@@ -108,10 +113,10 @@
 <li>브리지 칩 명시, 서명 드라이버, 고유 일련번호</li>
 <li>TX/RX 표시등, 극성이 분명한 단자 표기</li>
 </ol>
-<p>앞의 네 항목을 만족하는 컨버터는 통신 불량의 용의자 목록에서 스스로 빠진다. 진단 도구에 필요한 것은 결국 그것이다.</p></div>
-<aside class="aff"><script src="https://ads-partners.coupang.com/g.js"></script> <script> new PartnersCoupang.G({"id":1059152,"template":"carousel","trackingCode":"AF1367821","width":"680","height":"140","tsource":""}); </script></aside>
+<p>앞의 네 항목을 만족하는 컨버터는 통신 불량의 용의자 목록에서 스스로 빠진다. 진단 도구에 필요한 것은 결국 그것이다.</p><figure class="card"><img src="/img/ko-how-to-choose-a-usb-to-rs-485-converter-for-modbus-rtu-field-work-check-55621081ad.png" alt="신호와 전원 모두 절연, 절연 정격 명시, 버스 쪽 신호 공통 단자 / 버스 단자의 ESD·서지 보호 수치 / 자동 방향 제어와 지원 통신 속도 범위 / 종단 저항과 바이어스 저항의 개별 전환 / 보유 설비에 필요하다면 2선식·4선식 겸용 / 브리지 칩 명시, 서명 드라이버, 고유 일련번호 / TX/RX 표시등, 극성이 분명한 단자 표기" loading="lazy" width="1080"></figure></div>
+<aside class="aff"><p class="aff-cta">이 분야 쿠팡 인기 상품</p><script>new PartnersCoupang.G({"id": 1059152, "template": "carousel", "trackingCode": "AF1367821", "width": "680", "height": "140", "tsource": ""});</script></aside>
 <p class="tags"><span>RS-485</span><span>Modbus RTU</span><span>USB 컨버터</span><span>시리얼 통신</span><span>현장 공구</span></p>
-<p class="disclosure">초안 작성에 AI 도구를 사용했으며 운영자가 검토했습니다.</p>
+<p class="disclosure">공개 자료를 바탕으로 작성했으며 초안 작성에 AI 도구를 사용했습니다.</p>
 </article>
 <h2 class="list-head">다른 글</h2>
 <ul class="ladder">
@@ -124,7 +129,7 @@
 </ul>
 </main>
 <footer><div class="end"><i class="w w-in"></i><span class="end-box">END</span><i class="w w-fill"></i></div>
-<p>© 2026 현장 자동화 노트</p>
+<p>© 2026 살까 말까</p>
 <p><a href="/ko/about/">소개</a><a href="/ko/privacy/">개인정보처리방침</a><a href="/ko/feed.xml">RSS</a></p></footer>
 </div>
 </body>

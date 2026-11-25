@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>설비 데이터 수집: OPC UA와 MQTT 중 무엇을 쓸까 | 현장 자동화 노트</title>
+<title>설비 데이터 수집: OPC UA와 MQTT 중 무엇을 쓸까 | 살까 말까</title>
 <meta name="description" content="OPC UA와 MQTT는 역할이 다르다. 구간별 선택 기준과 각각에서 자주 만나는 장애, 점검 순서를 정리한다.">
 <link rel="canonical" href="https://postsfabiz.com/ko/opc-ua-vs-mqtt-for-shop-floor-data-collection/">
 <link rel="alternate" hreflang="en" href="https://postsfabiz.com/en/opc-ua-vs-mqtt-for-shop-floor-data-collection/">
@@ -12,25 +12,30 @@
 <meta property="og:description" content="OPC UA와 MQTT는 역할이 다르다. 구간별 선택 기준과 각각에서 자주 만나는 장애, 점검 순서를 정리한다.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://postsfabiz.com/ko/opc-ua-vs-mqtt-for-shop-floor-data-collection/">
-<meta property="og:site_name" content="현장 자동화 노트">
+<meta property="og:site_name" content="살까 말까">
+<meta property="og:image" content="https://postsfabiz.com/img/ko-opc-ua-vs-mqtt-for-shop-floor-data-collection-thumb-912bfef875.png">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="alternate" type="application/atom+xml" href="/ko/feed.xml" title="현장 자동화 노트">
+<link rel="alternate" type="application/atom+xml" href="/ko/feed.xml" title="살까 말까">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="/style.css?v=efde9d9d">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "설비 데이터 수집: OPC UA와 MQTT 중 무엇을 쓸까", "description": "OPC UA와 MQTT는 역할이 다르다. 구간별 선택 기준과 각각에서 자주 만나는 장애, 점검 순서를 정리한다.", "datePublished": "2026-11-25", "inLanguage": "ko", "author": {"@type": "Person", "name": "현장 자동화 노트"}}</script>
+<link rel="stylesheet" href="/style.css?v=7be9b041">
+<script src="https://ads-partners.coupang.com/g.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "설비 데이터 수집: OPC UA와 MQTT 중 무엇을 쓸까", "description": "OPC UA와 MQTT는 역할이 다르다. 구간별 선택 기준과 각각에서 자주 만나는 장애, 점검 순서를 정리한다.", "datePublished": "2026-11-25", "inLanguage": "ko", "author": {"@type": "Person", "name": "살까 말까"}}</script>
 </head>
 <body>
 <div class="frame">
-<header class="top"><a class="brand" href="/ko/">현장 자동화 노트</a>
-<nav><a href="/ko/about/">소개</a><a href="/en/opc-ua-vs-mqtt-for-shop-floor-data-collection/" hreflang="en">English</a></nav></header>
+<header class="top"><a class="brand" href="/ko/">살까 말까</a>
+<nav><a href="/ko/c/expertise/">현장 실무</a><a href="/ko/c/gear/">장비 선택</a><a href="/ko/about/">소개</a><a href="/en/opc-ua-vs-mqtt-for-shop-floor-data-collection/" hreflang="en">English</a></nav></header>
 <main>
 <article class="post">
 <header class="post-head"><div class="wire"><i class="w w-in"></i><span class="contact"></span><i class="w w-s"></i><time datetime="2026-11-25">2026-11-25</time><i class="w w-fill"></i><span class="cat">현장 실무</span><i class="w w-s"></i><span class="coil lamp-expertise"></span><i class="w w-out"></i></div>
 <h1>설비 데이터 수집: OPC UA와 MQTT 중 무엇을 쓸까</h1>
 <p class="lede">OPC UA와 MQTT는 역할이 다르다. 구간별 선택 기준과 각각에서 자주 만나는 장애, 점검 순서를 정리한다.</p>
 </header>
+<figure class="hero-img"><img src="/img/ko-opc-ua-vs-mqtt-for-shop-floor-data-collection-thumb-912bfef875.png" alt="설비 데이터 수집: OPC UA와 MQTT 중 무엇을 쓸까" width="1200" height="630"></figure>
 <p class="aff-note">이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.</p>
 <div class="prose"><p>"OPC UA를 쓸까, MQTT를 쓸까"라는 질문은 둘을 같은 종류로 놓고 시작한다. 실제로는 푸는 문제가 다르다. OPC UA는 "이 데이터가 무엇이고 제어기에서 어떻게 읽는가"에 답하고, MQTT는 "여러 송신자의 메시지를 여러 수신자에게, 내가 다 통제하지 못하는 네트워크로 어떻게 보내는가"에 답한다. 수집 프로젝트가 꼬이는 경우는 대개 한쪽에 다른 쪽의 일을 시켰을 때다.</p>
 <h2>두 프로토콜이 주는 것</h2>
@@ -82,7 +87,7 @@
 <p><strong>엣지에서 상위 시스템이나 클라우드까지.</strong> 수신처가 여럿이거나, 회선이 불안정하거나, 수신 측이 다른 네트워크 구역에 있으면 MQTT가 맞다. 장비는 브로커로 나가는 연결만 있으면 되므로, 설비마다 들어오는 포트를 여는 것보다 방화벽 검토가 훨씬 수월하다.</p>
 <p><strong>작고 단순한 구성.</strong> 설비 몇 대와 수집 서버 하나가 같은 네트워크에 있다면 브로커는 관리할 대상만 늘린다. OPC UA 직접 접속으로 충분하다.</p>
 <p>두 기술은 겹치는 부분도 있다. OPC UA 규격에는 MQTT 브로커를 전송 수단으로 쓸 수 있는 PubSub 모델이 있고, Sparkplug 규격은 MQTT 위에 토픽 구조와 페이로드 형식, 장치 상태 관리를 정해 둔다. 둘 다 MQTT가 데이터의 의미를 정하지 않기 때문에 나온 것이다. 지원 여부는 제품마다 다르므로 설계 전에 제어기와 소프트웨어가 실제로 무엇을 지원하는지 확인한다.</p>
-<h2>OPC UA 쪽에서 만나는 장애</h2>
+<aside class="aff"><p class="aff-cta">이 분야 쿠팡 인기 상품</p><script>new PartnersCoupang.G({"id": 1059152, "template": "carousel", "trackingCode": "AF1367821", "width": "680", "height": "140", "tsource": ""});</script></aside><h2>OPC UA 쪽에서 만나는 장애</h2>
 <p><strong>네트워크는 정상인데 접속이 안 된다.</strong> 가장 흔한 원인은 인증서 신뢰다. 양쪽이 서로의 인증서를 신뢰해야 하고, 많은 서버가 처음 보는 클라이언트 인증서를 거부 목록에 넣어 둔다. 이것을 신뢰 목록으로 옮겨야 한다. 방화벽보다 이것을 먼저 본다. 그다음은 클라이언트가 요청한 보안 정책과 서버가 허용한 정책의 불일치, 엔드포인트 주소의 호스트 이름을 클라이언트가 해석하지 못하는 경우, 시계가 크게 어긋나 인증서 유효기간이 맞지 않는 경우 순이다.</p>
 <p><strong>짧은 신호가 데이터에 없다.</strong> 구독은 서버가 샘플링 주기에 본 값만 알려준다. 두 샘플 사이에 켜졌다 꺼진 비트는 나타나지 않는다. 주기를 줄여 달라고 요청해도 서버가 지원하는 한도까지만 적용되고, 내장 서버는 요청보다 느린 값으로 조정해 응답하는 경우가 많다. 펄스나 횟수는 PLC에서 래치하거나 카운트한 뒤 그 값을 수집한다.</p>
 <p><strong>서버가 느려지거나 새 세션을 거부한다.</strong> 내장 서버는 세션, 구독, 감시 항목 수에 한도가 있고 제어 프로그램과 CPU를 나눠 쓴다. 한도는 모델과 펌웨어에 따라 다르므로 매뉴얼에서 확인한다. 여러 클라이언트가 같은 태그 수천 개를 각자 구독하는 것이 한도에 걸리는 전형적인 경로다. 수집기 하나가 읽어서 나눠 주는 구조로 바꾼다.</p>
@@ -104,9 +109,9 @@
 <li>장애 상황을 벤치에서 시험한다. 랜선을 뽑고, 브로커를 재시작하고, PLC를 재시작한 뒤 수신 측에 무엇이 보이는지, 수동 조치 없이 복구되는지 확인한다.</li>
 </ol>
 <p>다섯 번째 단계가 가장 자주 생략되는데, 두 프로토콜의 차이가 가장 분명히 드러나는 곳이 여기다.</p></div>
-<aside class="aff"><script src="https://ads-partners.coupang.com/g.js"></script> <script> new PartnersCoupang.G({"id":1059152,"template":"carousel","trackingCode":"AF1367821","width":"680","height":"140","tsource":""}); </script></aside>
+<aside class="aff"><p class="aff-cta">이 분야 쿠팡 인기 상품</p><script>new PartnersCoupang.G({"id": 1059152, "template": "carousel", "trackingCode": "AF1367821", "width": "680", "height": "140", "tsource": ""});</script></aside>
 <p class="tags"><span>OPC UA</span><span>MQTT</span><span>데이터 수집</span><span>IIoT</span><span>PLC</span></p>
-<p class="disclosure">초안 작성에 AI 도구를 사용했으며 운영자가 검토했습니다.</p>
+<p class="disclosure">공개 자료를 바탕으로 작성했으며 초안 작성에 AI 도구를 사용했습니다.</p>
 </article>
 <h2 class="list-head">다른 글</h2>
 <ul class="ladder">
@@ -119,7 +124,7 @@
 </ul>
 </main>
 <footer><div class="end"><i class="w w-in"></i><span class="end-box">END</span><i class="w w-fill"></i></div>
-<p>© 2026 현장 자동화 노트</p>
+<p>© 2026 살까 말까</p>
 <p><a href="/ko/about/">소개</a><a href="/ko/privacy/">개인정보처리방침</a><a href="/ko/feed.xml">RSS</a></p></footer>
 </div>
 </body>
